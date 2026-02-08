@@ -16,11 +16,23 @@ function moveBtn() {
 
 function finalYes() {
   document.getElementById("finalText").innerHTML =
-  "I love you Nazeer ❤️ Happy Valentine’s to us baby 💕";
-startConfetti();
+    "Always you, Nazeer ❤️ Happy Valentine’s to us ♾️";
+
+  startConfetti();
 }
 
-/* CONFETTI CODE */
+/* Floating hearts */
+const hearts = document.querySelector(".hearts");
+setInterval(() => {
+  const heart = document.createElement("div");
+  heart.innerHTML = "💗";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.animationDuration = (3 + Math.random() * 2) + "s";
+  hearts.appendChild(heart);
+  setTimeout(() => heart.remove(), 5000);
+}, 600);
+
+/* Confetti */
 const canvas = document.getElementById("confetti");
 const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
@@ -44,7 +56,6 @@ function startConfetti() {
 
 function drawConfetti() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-
   confettiPieces.forEach(p => {
     ctx.beginPath();
     ctx.fillStyle = p.color;
@@ -54,21 +65,5 @@ function drawConfetti() {
   });
 
   confettiPieces = confettiPieces.filter(p => p.y < canvas.height);
-
-  if (confettiPieces.length > 0) {
-    requestAnimationFrame(drawConfetti);
-  }
+  if (confettiPieces.length > 0) requestAnimationFrame(drawConfetti);
 }
-}
-
-/* Floating hearts */
-const hearts = document.querySelector(".hearts");
-setInterval(() => {
-  const heart = document.createElement("div");
-  heart.innerHTML = "💗";
-  heart.style.left = Math.random() * 100 + "vw";
-  heart.style.animationDuration = (3 + Math.random() * 2) + "s";
-  hearts.appendChild(heart);
-
-  setTimeout(() => heart.remove(), 5000);
-}, 600);
